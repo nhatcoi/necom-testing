@@ -10,8 +10,6 @@ import { useForm, zodResolver } from '@mantine/form';
 import useGetAllApi from 'hooks/use-get-all-api';
 import { ProvinceResponse } from 'models/Province';
 import ProvinceConfigs from 'pages/province/ProvinceConfigs';
-import { DistrictResponse } from 'models/District';
-import DistrictConfigs from 'pages/district/DistrictConfigs';
 import MiscUtils from 'utils/MiscUtils';
 import { useMutation } from 'react-query';
 import FetchUtils, { ErrorMessage } from 'utils/FetchUtils';
@@ -80,10 +78,10 @@ function ClientSettingPersonal() {
       setProvinceSelectList(selectList);
     }
   );
-  useGetAllApi<DistrictResponse>(DistrictConfigs.resourceUrl, DistrictConfigs.resourceKey,
+  useGetAllApi<WardResponse>(WardConfigs.resourceUrl, `${WardConfigs.resourceKey}-by-province`,
     { all: 1, filter: `province.id==${form.values['address.provinceId'] || 0}` },
-    (districtListResponse) => {
-      const selectList: SelectOption[] = districtListResponse.content.map((item) => ({
+    (wardListResponse) => {
+      const selectList: SelectOption[] = wardListResponse.content.map((item) => ({
         value: String(item.id),
         label: item.name,
       }));
@@ -91,7 +89,7 @@ function ClientSettingPersonal() {
     }
   );
   useGetAllApi<WardResponse>(WardConfigs.resourceUrl, WardConfigs.resourceKey,
-    { all: 1, filter: `district.id==${form.values['address.districtId'] || 0}` },
+    { all: 1, filter: `province.id==${form.values['address.provinceId'] || 0}` },
     (wardListResponse) => {
       const selectList: SelectOption[] = wardListResponse.content.map((item) => ({
         value: String(item.id),

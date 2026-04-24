@@ -8,8 +8,6 @@ import useSelectAddress from 'hooks/use-select-address';
 import useGetAllApi from 'hooks/use-get-all-api';
 import { ProvinceResponse } from 'models/Province';
 import ProvinceConfigs from 'pages/province/ProvinceConfigs';
-import { DistrictResponse } from 'models/District';
-import DistrictConfigs from 'pages/district/DistrictConfigs';
 import { WardResponse } from 'models/Ward';
 import WardConfigs from 'pages/ward/WardConfigs';
 import { useMutation } from 'react-query';
@@ -177,10 +175,10 @@ function ClientSignupStepOne({ nextStep }: { nextStep: () => void }) {
     },
     { refetchOnWindowFocus: false }
   );
-  useGetAllApi<DistrictResponse>(DistrictConfigs.resourceUrl, DistrictConfigs.resourceKey,
+  useGetAllApi<WardResponse>(WardConfigs.resourceUrl, `${WardConfigs.resourceKey}-by-province`,
     { all: 1, filter: `province.id==${form.values['address.provinceId'] || 0}` },
-    (districtListResponse) => {
-      const selectList: SelectOption[] = districtListResponse.content.map((item) => ({
+    (wardListResponse) => {
+      const selectList: SelectOption[] = wardListResponse.content.map((item) => ({
         value: String(item.id),
         label: item.name,
       }));
@@ -189,7 +187,7 @@ function ClientSignupStepOne({ nextStep }: { nextStep: () => void }) {
     { refetchOnWindowFocus: false }
   );
   useGetAllApi<WardResponse>(WardConfigs.resourceUrl, WardConfigs.resourceKey,
-    { all: 1, filter: `district.id==${form.values['address.districtId'] || 0}` },
+    { all: 1, filter: `province.id==${form.values['address.provinceId'] || 0}` },
     (wardListResponse) => {
       const selectList: SelectOption[] = wardListResponse.content.map((item) => ({
         value: String(item.id),

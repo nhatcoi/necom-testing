@@ -7,7 +7,8 @@ class ResourceURL {
   // ADMIN
   static ADDRESS = apiPath + '/addresses';
   static PROVINCE = apiPath + '/provinces';
-  static DISTRICT = apiPath + '/districts';
+  // Backend no longer exposes /districts; reuse wards endpoint for dependent selects.
+  static DISTRICT = apiPath + '/wards';
   static WARD = apiPath + '/wards';
 
   static USER = apiPath + '/users';
