@@ -71,11 +71,11 @@ class CustomerConfigs extends Configs {
       type: EntityPropertyType.STRING,
     },
     'user.address.district.name': {
-      label: 'Tên quận huyện khách hàng',
+      label: 'Tên phường xã khách hàng',
       type: EntityPropertyType.STRING,
     },
     'user.address.district.code': {
-      label: 'Mã quận huyện khách hàng',
+      label: 'Mã phường xã khách hàng',
       type: EntityPropertyType.STRING,
     },
     'user.avatar': {
@@ -108,7 +108,7 @@ class CustomerConfigs extends Configs {
       isNotAddToFilterCriteria: true,
     },
     'user.address.districtId': {
-      label: 'Quận huyện',
+      label: 'Phường xã',
       type: EntityPropertyType.NUMBER,
       isNotAddToSortCriteria: true,
       isNotAddToFilterCriteria: true,

@@ -40,7 +40,7 @@ class DestinationConfigs extends Configs {
       isShowInTable: true,
     },
     'address.district.name': {
-      label: 'Tên quận huyện',
+      label: 'Tên phường xã',
       type: EntityPropertyType.STRING,
       isShowInTable: true,
     },
@@ -56,7 +56,7 @@ class DestinationConfigs extends Configs {
       isNotAddToFilterCriteria: true,
     },
     'address.districtId': {
-      label: 'Quận huyện',
+      label: 'Phường xã',
       type: EntityPropertyType.NUMBER,
       isNotAddToSortCriteria: true,
       isNotAddToFilterCriteria: true,

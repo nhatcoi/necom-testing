@@ -10,21 +10,21 @@ class DistrictConfigs extends Configs {
   static managerPath = ManagerPath.DISTRICT;
   static resourceUrl = ResourceURL.DISTRICT;
   static resourceKey = 'districts';
-  static createTitle = 'Thêm quận huyện';
-  static updateTitle = 'Cập nhật quận huyện';
-  static manageTitle = 'Quản lý quận huyện';
+  static createTitle = 'Thêm phường xã';
+  static updateTitle = 'Cập nhật phường xã';
+  static manageTitle = 'Quản lý phường xã';
 
   static manageTitleLinks: TitleLink[] = AddressConfigs.manageTitleLinks;
 
   protected static _rawProperties = {
     ...PageConfigs.getProperties(true, true, true),
     name: {
-      label: 'Tên quận huyện',
+      label: 'Tên phường xã',
       type: EntityPropertyType.STRING,
       isShowInTable: true,
     },
     code: {
-      label: 'Mã quận huyện',
+      label: 'Mã phường xã',
       type: EntityPropertyType.STRING,
       isShowInTable: true,
     },

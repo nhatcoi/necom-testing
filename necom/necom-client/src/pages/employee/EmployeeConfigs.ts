@@ -78,11 +78,11 @@ class EmployeeConfigs extends Configs {
       type: EntityPropertyType.STRING,
     },
     'user.address.district.name': {
-      label: 'Tên quận huyện nhân viên',
+      label: 'Tên phường xã nhân viên',
       type: EntityPropertyType.STRING,
     },
     'user.address.district.code': {
-      label: 'Mã quận huyện nhân viên',
+      label: 'Mã phường xã nhân viên',
       type: EntityPropertyType.STRING,
     },
     'user.avatar': {
@@ -115,7 +115,7 @@ class EmployeeConfigs extends Configs {
       isNotAddToFilterCriteria: true,
     },
     'user.address.districtId': {
-      label: 'Quận huyện',
+      label: 'Phường xã',
       type: EntityPropertyType.NUMBER,
       isNotAddToSortCriteria: true,
       isNotAddToFilterCriteria: true,
@@ -138,11 +138,11 @@ class EmployeeConfigs extends Configs {
       type: EntityPropertyType.STRING,
     },
     'office.address.district.name': {
-      label: 'Tên quận huyện văn phòng',
+      label: 'Tên phường xã văn phòng',
       type: EntityPropertyType.STRING,
     },
     'office.address.district.code': {
-      label: 'Mã quận huyện văn phòng',
+      label: 'Mã phường xã văn phòng',
       type: EntityPropertyType.STRING,
     },
     'office.status': {

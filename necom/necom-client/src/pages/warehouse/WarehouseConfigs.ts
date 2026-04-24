@@ -69,7 +69,7 @@ class WarehouseConfigs extends Configs {
       type: EntityPropertyType.STRING,
     },
     'address.district.name': {
-      label: 'Tên quận huyện',
+      label: 'Tên phường xã',
       type: EntityPropertyType.STRING,
     },
     status: {
@@ -84,7 +84,7 @@ class WarehouseConfigs extends Configs {
       isNotAddToFilterCriteria: true,
     },
     'address.districtId': {
-      label: 'Quận huyện',
+      label: 'Phường xã',
       type: EntityPropertyType.NUMBER,
       isNotAddToSortCriteria: true,
       isNotAddToFilterCriteria: true,

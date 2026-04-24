@@ -2096,7 +2096,7 @@ insert into ward (id, created_at, updated_at, name, code, province_id) values (2
 insert into ward (id, created_at, updated_at, name, code, province_id) values (2020, '2026-02-15 00:00:00', '2026-02-15 00:00:00', 'Xã Ân Hảo', '21697', 23);
 insert into ward (id, created_at, updated_at, name, code, province_id) values (2021, '2026-02-15 00:00:00', '2026-02-15 00:00:00', 'Xã Vạn Đức', '21703', 23);
 insert into ward (id, created_at, updated_at, name, code, province_id) values (2022, '2026-02-15 00:00:00', '2026-02-15 00:00:00', 'Xã Ân Tường', '21715', 23);
-insert into ward (id, created_at, updated_at, name, code, province_id) values (2026, '2026-02-15 00:00:00', '2026-02-15 00:00:00', 'Xã Kim Sơn', '21727', 23);
+insert into ward (id, created_at, updated_at, name, code, province_id) values (2023, '2026-02-15 00:00:00', '2026-02-15 00:00:00', 'Xã Kim Sơn', '21727', 23);
 insert into ward (id, created_at, updated_at, name, code, province_id) values (2024, '2026-02-15 00:00:00', '2026-02-15 00:00:00', 'Xã Phù Mỹ', '21730', 23);
 insert into ward (id, created_at, updated_at, name, code, province_id) values (2025, '2026-02-15 00:00:00', '2026-02-15 00:00:00', 'Xã Bình Dương', '21733', 23);
 insert into ward (id, created_at, updated_at, name, code, province_id) values (2026, '2026-02-15 00:00:00', '2026-02-15 00:00:00', 'Xã Phù Mỹ Bắc', '21739', 23);

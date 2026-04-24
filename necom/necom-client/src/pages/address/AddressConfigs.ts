@@ -23,7 +23,7 @@ class AddressConfigs extends Configs {
     },
     {
       link: ManagerPath.DISTRICT,
-      label: 'Quản lý quận huyện',
+      label: 'Quản lý phường xã',
     },
   ];
 
@@ -44,12 +44,12 @@ class AddressConfigs extends Configs {
       type: EntityPropertyType.STRING,
     },
     'district.name': {
-      label: 'Tên quận huyện',
+      label: 'Tên phường xã',
       type: EntityPropertyType.STRING,
       isShowInTable: true,
     },
     'district.code': {
-      label: 'Mã quận huyện',
+      label: 'Mã phường xã',
       type: EntityPropertyType.STRING,
     },
     provinceId: {
@@ -59,7 +59,7 @@ class AddressConfigs extends Configs {
       isNotAddToFilterCriteria: true,
     },
     districtId: {
-      label: 'Quận huyện',
+      label: 'Phường xã',
       type: EntityPropertyType.NUMBER,
       isNotAddToSortCriteria: true,
       isNotAddToFilterCriteria: true,

@@ -4,7 +4,6 @@ import MessageUtils from 'utils/MessageUtils';
 import { useForm, zodResolver } from '@mantine/form';
 import { Empty, RegistrationRequest, RegistrationResponse, SelectOption } from 'types';
 import useTitle from 'hooks/use-title';
-import useSelectAddress from 'hooks/use-select-address';
 import useGetAllApi from 'hooks/use-get-all-api';
 import { ProvinceResponse } from 'models/Province';
 import ProvinceConfigs from 'pages/province/ProvinceConfigs';
@@ -126,7 +125,6 @@ function ClientSignupStepOne({ nextStep }: { nextStep: () => void }) {
     gender: 'M' as 'M' | 'F',
     'address.line': '',
     'address.provinceId': null as string | null,
-    'address.districtId': null as string | null,
     'address.wardId': null as string | null,
     avatar: null, // Không dùng
     status: '2', // Không dùng
@@ -146,7 +144,6 @@ function ClientSignupStepOne({ nextStep }: { nextStep: () => void }) {
     gender: z.string({ invalid_type_error: 'Vui lòng không bỏ trống' }),
     'address.line': z.string({ invalid_type_error: 'Vui lòng không bỏ trống' }),
     'address.provinceId': z.string({ invalid_type_error: 'Vui lòng không bỏ trống' }),
-    'address.districtId': z.string({ invalid_type_error: 'Vui lòng không bỏ trống' }),
     'address.wardId': z.string({ invalid_type_error: 'Vui lòng không bỏ trống' }),
     avatar: z.string().nullable(),
     status: z.string(),
@@ -158,10 +155,7 @@ function ClientSignupStepOne({ nextStep }: { nextStep: () => void }) {
     schema: zodResolver(formSchema),
   });
 
-  useSelectAddress(form, 'address.provinceId', 'address.districtId', 'address.wardId');
-
   const [provinceSelectList, setProvinceSelectList] = useState<SelectOption[]>([]);
-  const [districtSelectList, setDistrictSelectList] = useState<SelectOption[]>([]);
   const [wardSelectList, setWardSelectList] = useState<SelectOption[]>([]);
 
   useGetAllApi<ProvinceResponse>(ProvinceConfigs.resourceUrl, ProvinceConfigs.resourceKey,
@@ -172,17 +166,6 @@ function ClientSignupStepOne({ nextStep }: { nextStep: () => void }) {
         label: item.name,
       }));
       setProvinceSelectList(selectList);
-    },
-    { refetchOnWindowFocus: false }
-  );
-  useGetAllApi<WardResponse>(WardConfigs.resourceUrl, `${WardConfigs.resourceKey}-by-province`,
-    { all: 1, filter: `province.id==${form.values['address.provinceId'] || 0}` },
-    (wardListResponse) => {
-      const selectList: SelectOption[] = wardListResponse.content.map((item) => ({
-        value: String(item.id),
-        label: item.name,
-      }));
-      setDistrictSelectList(selectList);
     },
     { refetchOnWindowFocus: false }
   );
@@ -221,7 +204,7 @@ function ClientSignupStepOne({ nextStep }: { nextStep: () => void }) {
       address: {
         line: formValues['address.line'],
         provinceId: Number(formValues['address.provinceId']),
-        districtId: Number(formValues['address.districtId']),
+        districtId: null,
         wardId: Number(formValues['address.wardId']),
       },
       avatar: formValues.avatar,
@@ -290,19 +273,10 @@ function ClientSignupStepOne({ nextStep }: { nextStep: () => void }) {
           <Select
             required
             radius="md"
-            label="Quận huyện"
-            placeholder="Chọn quận huyện"
-            data={districtSelectList}
-            disabled={form.values['address.provinceId'] === null}
-            {...form.getInputProps('address.districtId')}
-          />
-          <Select
-            required
-            radius="md"
             label="Phường xã"
             placeholder="Chọn phường xã"
             data={wardSelectList}
-            disabled={form.values['address.districtId'] === null}
+            disabled={form.values['address.provinceId'] === null}
             {...form.getInputProps('address.wardId')}
           />
           <TextInput

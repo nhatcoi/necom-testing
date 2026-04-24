@@ -63,37 +63,11 @@ VALUES ('2022-01-28 17:13:08', '2022-01-28 19:16:21', '1706 Carberry Lane', 29, 
 INSERT INTO address (created_at, updated_at, line, province_id, ward_id)
 VALUES ('2021-10-06 19:21:11', '2022-05-03 08:50:28', '02 Moland Court', 30, 2827);
 
--- user TABLE: 20 records
-INSERT INTO user (created_at, updated_at, username, password, fullname, email, phone, gender, address_id, avatar, status)
-VALUES ('2021-10-05 07:30:07', '2021-06-03 16:38:23', 'dnucator0', '$2a$10$VsJWsj.z4mu7hwgl24mbLO4kINGNU3NntESfPiZbnslKDts.RqEl6', 'Dolly Nucator', 'dnucator0@prweb.com', '0919944705', 'M', 1, 'http://dummyimage.com/138x100.png/dddddd/000000', 1);
-INSERT INTO user (created_at, updated_at, username, password, fullname, email, phone, gender, address_id, avatar, status)
-VALUES ('2022-01-07 17:51:29', '2022-02-24 10:37:18', 'jgratten1', '$2a$10$VsJWsj.z4mu7hwgl24mbLO4kINGNU3NntESfPiZbnslKDts.RqEl6', 'Jose Gratten', 'jgratten1@google.co.jp', '0919944709', 'F', 2, 'http://dummyimage.com/222x100.png/ff4444/ffffff', 1);
-INSERT INTO user (created_at, updated_at, username, password, fullname, email, phone, gender, address_id, avatar, status)
-VALUES ('2021-11-30 21:45:42', '2022-03-05 17:40:25', 'ethuillier2', '$2a$10$VsJWsj.z4mu7hwgl24mbLO4kINGNU3NntESfPiZbnslKDts.RqEl6', 'Ermin Thuillier', 'ethuillier2@jimdo.com', '0919944305', 'M', 3, null, 1);
-INSERT INTO user (created_at, updated_at, username, password, fullname, email, phone, gender, address_id, avatar, status)
-VALUES ('2022-01-27 04:22:37', '2022-05-04 02:25:59', 'dtreat3', '$2a$10$VsJWsj.z4mu7hwgl24mbLO4kINGNU3NntESfPiZbnslKDts.RqEl6', 'Danila Treat', 'dtreat3@nymag.com', '0919944735', 'F', 4, null, 1);
-INSERT INTO user (created_at, updated_at, username, password, fullname, email, phone, gender, address_id, avatar, status)
-VALUES ('2022-03-27 11:16:32', '2021-10-03 12:04:10', 'tkorting4', '$2a$10$VsJWsj.z4mu7hwgl24mbLO4kINGNU3NntESfPiZbnslKDts.RqEl6', 'Tanya Korting', 'tkorting4@livejournal.com', '0919944735', 'F', 5, null, 1);
+-- user TABLE: initialized by Java seed (AuthDomainDataInitializer)
 
--- role TABLE: 3 records
-INSERT INTO `role` (created_at, updated_at, code, name, status)
-VALUES ('1971-04-11 07:45:46', '2006-04-26 03:05:23', 'ADMIN', 'Quản trị viên', 1);
-INSERT INTO `role` (created_at, updated_at, code, name, status)
-VALUES ('1995-08-23 17:15:34', '1983-06-18 03:01:29', 'EMPLOYEE', 'Nhân viên', 1);
-INSERT INTO `role` (created_at, updated_at, code, name, status)
-VALUES ('1989-01-25 23:05:02', '2001-01-13 09:01:36', 'CUSTOMER', 'Khách hàng', 1);
+-- role TABLE: initialized by Java seed (AuthDomainDataInitializer)
 
--- user_role TABLE: 5 records
-INSERT INTO user_role (user_id, role_id)
-VALUES (1, 1);
-INSERT INTO user_role (user_id, role_id)
-VALUES (2, 1);
-INSERT INTO user_role (user_id, role_id)
-VALUES (3, 2);
-INSERT INTO user_role (user_id, role_id)
-VALUES (4, 3);
-INSERT INTO user_role (user_id, role_id)
-VALUES (5, 3);
+-- user_role TABLE: initialized by Java seed (AuthDomainDataInitializer)
 
 -- office TABLE: 5 records
 INSERT INTO office (created_at, updated_at, name, address_id, status)
@@ -147,9 +121,7 @@ VALUES ('2022-02-08 19:12:42', '2021-09-16 21:32:18', 'Paralegal', 1);
 INSERT INTO job_title (created_at, updated_at, name, status)
 VALUES ('2022-03-29 23:30:36', '2022-01-15 11:44:18', 'Compensation Analyst', 3);
 
--- employee: 5 records
-INSERT INTO employee (created_at, updated_at, user_id, office_id, department_id, job_type_id, job_level_id, job_title_id)
-VALUES ('2021-09-04 07:46:15', '2021-11-10 11:49:52', 3, 4, 5, 2, 3, 4);
+-- employee TABLE: initialized by Java seed (AuthDomainDataInitializer)
 
 -- customer_group TABLE: 5 records
 INSERT INTO customer_group (created_at, updated_at, code, name, description, color, status)
@@ -183,11 +155,7 @@ VALUES ('2021-11-04 19:46:58', '2022-01-06 21:22:50', '60429-239', 'Disable', 'S
 INSERT INTO customer_status (created_at, updated_at, code, name, description, color, status)
 VALUES ('2022-03-27 06:15:17', '2021-09-29 17:49:37', '49281-395', 'None', 'Other lymphedema', 'Maroon', 2);
 
--- customer TABLE: 5 records
-INSERT INTO customer (created_at, updated_at, user_id, customer_group_id, customer_resource_id, customer_status_id)
-VALUES ('2022-05-01 13:27:06', '2022-02-02 16:18:00', 4, 4, 5, 3);
-INSERT INTO customer (created_at, updated_at, user_id, customer_group_id, customer_resource_id, customer_status_id)
-VALUES ('2021-08-22 12:52:55', '2022-03-05 09:30:21', 5, 2, 4, 2);
+-- customer TABLE: initialized by Java seed (AuthDomainDataInitializer)
 
 -- property TABLE: 2 records
 INSERT INTO property (created_at, updated_at, name, code, description, status)

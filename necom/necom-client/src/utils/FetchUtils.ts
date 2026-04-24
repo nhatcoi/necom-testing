@@ -39,13 +39,30 @@ export interface ErrorMessage {
 type BasicRequestParams = Record<string, string | number | null | boolean>;
 
 class FetchUtils {
+  private static withNgrokBypassHeaders(resourceUrl: string, headers?: Record<string, string>) {
+    const nextHeaders = { ...(headers || {}) };
+    try {
+      const url = new URL(resourceUrl, window.location.origin);
+      if (url.hostname.endsWith('ngrok-free.app')) {
+        nextHeaders['ngrok-skip-browser-warning'] = 'true';
+      }
+    } catch {
+      // Keep original headers for malformed or non-standard URLs
+    }
+    return nextHeaders;
+  }
+
   /**
    * Hàm get cho các trường hợp truy vấn dữ liệu bên client
    * @param resourceUrl
    * @param requestParams
    */
   static async get<O>(resourceUrl: string, requestParams?: BasicRequestParams): Promise<O> {
-    const response = await fetch(FetchUtils.concatParams(resourceUrl, requestParams));
+    const requestUrl = FetchUtils.concatParams(resourceUrl, requestParams);
+    const response = await fetch(requestUrl, {
+      method: 'GET',
+      headers: FetchUtils.withNgrokBypassHeaders(requestUrl),
+    });
     if (!response.ok) {
       throw await response.json();
     }
@@ -60,10 +77,10 @@ class FetchUtils {
   static async post<I, O>(resourceUrl: string, requestBody: I): Promise<O> {
     const response = await fetch(resourceUrl, {
       method: 'POST',
-      headers: {
+      headers: FetchUtils.withNgrokBypassHeaders(resourceUrl, {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-      },
+      }),
       body: JSON.stringify(requestBody),
     });
     if (!response.ok) {
@@ -79,12 +96,13 @@ class FetchUtils {
    * @param requestParams
    */
   static async put<I, O>(resourceUrl: string, requestBody: I, requestParams?: BasicRequestParams): Promise<O> {
-    const response = await fetch(FetchUtils.concatParams(resourceUrl, requestParams), {
+    const requestUrl = FetchUtils.concatParams(resourceUrl, requestParams);
+    const response = await fetch(requestUrl, {
       method: 'PUT',
-      headers: {
+      headers: FetchUtils.withNgrokBypassHeaders(requestUrl, {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-      },
+      }),
       body: JSON.stringify(requestBody),
     });
     if (!response.ok) {
@@ -104,12 +122,13 @@ class FetchUtils {
       .getItem(isAdmin ? 'necom-admin-auth-store' : 'necom-auth-store') || '{}').state?.jwtToken;
 
     // Source: https://stackoverflow.com/a/70426220
-    const response = await fetch(FetchUtils.concatParams(resourceUrl, requestParams), {
+    const requestUrl = FetchUtils.concatParams(resourceUrl, requestParams);
+    const response = await fetch(requestUrl, {
       method: 'GET',
-      headers: {
+      headers: FetchUtils.withNgrokBypassHeaders(requestUrl, {
         'Content-type': 'application/json',
         'Authorization': `Bearer ${token}`,
-      },
+      }),
     });
 
     if (!response.ok) {
@@ -200,7 +219,11 @@ class FetchUtils {
    * @param requestParams
    */
   static async getAll<O>(resourceUrl: string, requestParams?: RequestParams): Promise<ListResponse<O>> {
-    const response = await fetch(FetchUtils.concatParams(resourceUrl, { ...requestParams }));
+    const requestUrl = FetchUtils.concatParams(resourceUrl, { ...requestParams });
+    const response = await fetch(requestUrl, {
+      method: 'GET',
+      headers: FetchUtils.withNgrokBypassHeaders(requestUrl),
+    });
     if (!response.ok) {
       throw await response.json();
     }
@@ -213,7 +236,11 @@ class FetchUtils {
    * @param entityId
    */
   static async getById<O>(resourceUrl: string, entityId: number): Promise<O> {
-    const response = await fetch(resourceUrl + '/' + entityId);
+    const requestUrl = resourceUrl + '/' + entityId;
+    const response = await fetch(requestUrl, {
+      method: 'GET',
+      headers: FetchUtils.withNgrokBypassHeaders(requestUrl),
+    });
     if (!response.ok) {
       throw await response.json();
     }

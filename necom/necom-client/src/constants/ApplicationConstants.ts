@@ -1,8 +1,17 @@
+const trimTrailingSlash = (value: string) => value.replace(/\/+$/, '');
+
 class ApplicationConstants {
   static HOME_PATH = '';
-  static API_PATH = '/api';
-  static CLIENT_API_PATH = '/client-api';
-  static WEBSOCKET_PATH = window.location.origin.replace(/^http/, 'ws') + '/ws';
+
+  // If not provided, client uses same-origin backend (works for local Docker and reverse proxy setups).
+  private static API_ORIGIN = trimTrailingSlash(process.env.REACT_APP_API_ORIGIN || window.location.origin);
+  private static WS_ORIGIN = trimTrailingSlash(
+    process.env.REACT_APP_WS_ORIGIN || ApplicationConstants.API_ORIGIN.replace(/^http/, 'ws')
+  );
+
+  static API_PATH = `${ApplicationConstants.API_ORIGIN}/api`;
+  static CLIENT_API_PATH = `${ApplicationConstants.API_ORIGIN}/client-api`;
+  static WEBSOCKET_PATH = `${ApplicationConstants.WS_ORIGIN}/ws`;
 
   static DEFAULT_TAX = 0.1;
   static DEFAULT_SHIPPING_COST = 0;

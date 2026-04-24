@@ -67,7 +67,7 @@ function useOrderCreateViewModel() {
       toPhone: formValues.toPhone,
       toAddress: formValues.toAddress,
       toWardName: formValues.toWardName,
-      toDistrictName: formValues.toDistrictName,
+      toDistrictName: formValues.toProvinceName,
       toProvinceName: formValues.toProvinceName,
       orderResourceId: Number(formValues.orderResourceId),
       orderCancellationReasonId: Number(formValues.orderCancellationReasonId) || null,

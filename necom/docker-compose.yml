@@ -14,7 +14,6 @@ services:
       # Lexicographic order: province/ward first, then app schema, then seed data
       - ./necom-server/src/main/resources/address.sql:/docker-entrypoint-initdb.d/01-address.sql
       - ./necom-server/src/main/resources/schema.sql:/docker-entrypoint-initdb.d/02-schema.sql
-      - ./necom-server/src/main/resources/data.sql:/docker-entrypoint-initdb.d/03-data.sql
     ports:
       - "3306:3306"
     networks:

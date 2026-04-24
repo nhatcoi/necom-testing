@@ -76,7 +76,7 @@ class SupplierConfigs extends Configs {
       type: EntityPropertyType.STRING,
     },
     'address.district.name': {
-      label: 'Tên quận huyện công ty',
+      label: 'Tên phường xã công ty',
       type: EntityPropertyType.STRING,
     },
     'address.provinceId': {
@@ -86,7 +86,7 @@ class SupplierConfigs extends Configs {
       isNotAddToFilterCriteria: true,
     },
     'address.districtId': {
-      label: 'Quận huyện công ty',
+      label: 'Phường xã công ty',
       type: EntityPropertyType.NUMBER,
       isNotAddToSortCriteria: true,
       isNotAddToFilterCriteria: true,

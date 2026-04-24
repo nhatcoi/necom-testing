@@ -63,11 +63,11 @@ class UserConfigs extends Configs {
       type: EntityPropertyType.STRING,
     },
     'address.district.name': {
-      label: 'Tên quận huyện',
+      label: 'Tên phường xã',
       type: EntityPropertyType.STRING,
     },
     'address.district.code': {
-      label: 'Mã quận huyện',
+      label: 'Mã phường xã',
       type: EntityPropertyType.STRING,
     },
     avatar: {
@@ -102,7 +102,7 @@ class UserConfigs extends Configs {
       isNotAddToFilterCriteria: true,
     },
     'address.districtId': {
-      label: 'Quận huyện',
+      label: 'Phường xã',
       type: EntityPropertyType.NUMBER,
       isNotAddToSortCriteria: true,
       isNotAddToFilterCriteria: true,
