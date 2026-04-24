@@ -1,0 +1,73 @@
+version: '3.9'
+
+services:
+  necom-database:
+    image: mysql:8.0
+    container_name: necom-database
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-necom}
+      MYSQL_USER: ${MYSQL_USER:-necom}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-necom}
+    volumes:
+      - mysql-data:/var/lib/mysql
+      # Lexicographic order: province/ward first, then app schema, then seed data
+      - ./necom-server/src/main/resources/address.sql:/docker-entrypoint-initdb.d/01-address.sql
+      - ./necom-server/src/main/resources/schema.sql:/docker-entrypoint-initdb.d/02-schema.sql
+      - ./necom-server/src/main/resources/data.sql:/docker-entrypoint-initdb.d/03-data.sql
+    ports:
+      - "3306:3306"
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-root}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+  necom-server:
+    container_name: necom-server
+    build:
+      context: ./necom-server
+      dockerfile: Dockerfile
+    image: necom-server:latest
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://necom-database:3306/necom?createDatabaseIfNotExist=true&sessionVariables=sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'
+      SPRING_DATASOURCE_USERNAME: ${MYSQL_USER:-necom}
+      SPRING_DATASOURCE_PASSWORD: ${MYSQL_PASSWORD:-necom}
+      SPRING_PROFILES_ACTIVE: dev
+    ports:
+      - "8085:8085"
+    depends_on:
+      necom-database:
+        condition: service_healthy
+    networks:
+      - backend
+    restart: always
+
+  necom-client:
+    container_name: necom-client
+    build:
+      context: ./necom-client
+      dockerfile: Dockerfile
+    image: necom-client:latest
+    ports:
+      - "80:80"
+    depends_on:
+      - necom-server
+    networks:
+      - backend
+    restart: always
+
+volumes:
+  mysql-data:
+    driver: local
+
+networks:
+  backend:
+    driver: bridge
+    name: necom-network
+
+

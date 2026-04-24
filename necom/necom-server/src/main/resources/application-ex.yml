@@ -1,0 +1,80 @@
+server:
+  port: 8085
+  error:
+    include-stacktrace: never
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/necom?createDatabaseIfNotExist=true&sessionVariables=sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:}
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        connection:
+          CharSet: UTF-8
+          characterEncoding: UTF-8
+          useUnicode: true
+        format_sql: true
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  sql:
+    init:
+      mode: always
+      # Nguồn địa danh: src/main/resources/address/*.sql → scripts/build_address_sql.py → address.sql
+      schema-locations: classpath:address.sql, classpath:schema.sql
+      continue-on-error: true
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:your-email@gmail.com}
+    password: ${MAIL_PASSWORD:your-app-password}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type: TRACE
+      springframework:
+        web: TRACE
+    web: TRACE
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: mappings
+
+springdoc:
+  show-actuator: false
+
+necom:
+  app:
+    jwtSecret: ${JWT_SECRET:your-jwt-secret-key}
+    jwtExpirationMs: ${JWT_EXPIRATION_MS:10080000}
+    jwtRefreshExpirationMs: ${JWT_REFRESH_EXPIRATION_MS:86400000}
+    shipping:
+      ghnToken: ${GHN_TOKEN:your-ghn-token}
+      ghnShopId: ${GHN_SHOP_ID:your-ghn-shop-id}
+      ghnApiPath: ${GHN_API_PATH:https://dev-online-gateway.ghn.vn/shiip/public-api/v2}
+
+paypal:
+  baseUrl: ${PAYPAL_BASE_URL:https://api-m.sandbox.paypal.com}
+  clientId: ${PAYPAL_CLIENT_ID:your-paypal-client-id}
+  secret: ${PAYPAL_SECRET:your-paypal-secret}
+
