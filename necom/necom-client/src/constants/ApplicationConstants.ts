@@ -1,8 +1,8 @@
 class ApplicationConstants {
-  static HOME_PATH = 'http://localhost:8085';
-  static API_PATH = ApplicationConstants.HOME_PATH + '/api';
-  static CLIENT_API_PATH = ApplicationConstants.HOME_PATH + '/client-api';
-  static WEBSOCKET_PATH = ApplicationConstants.HOME_PATH + '/ws';
+  static HOME_PATH = '';
+  static API_PATH = '/api';
+  static CLIENT_API_PATH = '/client-api';
+  static WEBSOCKET_PATH = window.location.origin.replace(/^http/, 'ws') + '/ws';
 
   static DEFAULT_TAX = 0.1;
   static DEFAULT_SHIPPING_COST = 0;

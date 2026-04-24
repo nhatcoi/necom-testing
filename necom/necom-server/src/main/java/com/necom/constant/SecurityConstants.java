@@ -17,6 +17,7 @@ public interface SecurityConstants {
     };
 
     String[] IGNORING_API_PATHS = {
+            "/client-api/products/**",
             "/client-api/notifications/events",
             "/client-api/reviews/products/**",
             "/client-api/orders/success",
