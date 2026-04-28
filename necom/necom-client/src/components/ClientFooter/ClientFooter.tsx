@@ -75,7 +75,7 @@ function ClientFooter() {
               </Group>
               <Stack spacing={theme.spacing.xs / 2}>
                 <Text weight={500}>Địa chỉ liên hệ</Text>
-                <Text>Tòa nhà Bitexco, Quận 1, Thành phố Hồ Chí Minh</Text>
+                <Text>Phenikaa University, Ha Dong, Hanoi</Text>
               </Stack>
               <Group spacing="sm">
                 <ActionIcon color="blue" size="xl" radius="xl" variant="light">
